@@ -1,8 +1,5 @@
-from ast import Num
-from locale import currency
-from decimal import Decimal
 from flask import Flask, render_template, request, json
-from forex_python.converter import CurrencyRates
+from forex_python.converter import CurrencyRates, CurrencyCodes
 
 app=Flask(__name__)
 app.config['SECRET KEY']="asdfQWERDsfawet"
@@ -18,4 +15,6 @@ def convert_currency():
     currency_to=request.args['currencyTo']
     start_amount=float(request.args['amount'])
     finish_amount = c.convert(currency_from, currency_to, start_amount)
-    return render_template('conversion.html', amount=finish_amount)
+    curr_code=CurrencyCodes()
+    code=curr_code.get_symbol(currency_to)
+    return render_template('conversion.html', code=code, amount=finish_amount)
