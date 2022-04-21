@@ -11,8 +11,8 @@ def home():
 @app.route('/convert')
 def convert_currency():
     c=CurrencyRates()
-    currency_from=request.args['currencyFrom']
-    currency_to=request.args['currencyTo']
+    currency_from=request.args['currencyFrom'].upper()
+    currency_to=request.args['currencyTo'].upper()
     start_amount=float(request.args['amount'])
     finish_amount = c.convert(currency_from, currency_to, start_amount)
     curr_code=CurrencyCodes()
