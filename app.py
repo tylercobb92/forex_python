@@ -1,5 +1,5 @@
 from ast import Num
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template
 from forex_python.converter import CurrencyRates, CurrencyCodes
 from config import allowed_currencies, currency_from, currency_to, start_amount
 
