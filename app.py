@@ -19,14 +19,15 @@ def convert_currency():
     currency_to=request.args['currencyTo'].upper()
     start_amount=float(request.args['amount'])
 
-    err_0='All fields required'
     rule_1=currency_from in allowed_currencies
-    err_1=f'Not a valid code: {currency_from}'
     rule_2=currency_to in allowed_currencies
-    err_2=f'Not a valid code: {currency_to}'
     rule_3_1=start_amount>0
     rule_3_2=start_amount == int
     rule_3_3=start_amount == float
+
+    err_0='All fields required'
+    err_1=f'Not a valid code: {currency_from}'
+    err_2=f'Not a valid code: {currency_to}'
     err_3=f'Not a valid amount {start_amount}'
 
     if not currency_from or not currency_to or not start_amount:
