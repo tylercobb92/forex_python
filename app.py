@@ -1,7 +1,7 @@
 from ast import Num
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, request
 from forex_python.converter import CurrencyRates, CurrencyCodes
-from config import allowed_currencies, currency_from, currency_to, start_amount
+from config import allowed_currencies
 
 app=Flask(__name__)
 app.config['SECRET KEY']="asdfQWERDsfawet"
@@ -15,6 +15,9 @@ def home():
 
 @app.route('/conversion')
 def convert_currency():
+    currency_from=request.args['currencyFrom'].upper()
+    currency_to=request.args['currencyTo'].upper()
+    start_amount=float(request.args['amount'])
 
     err_0='All fields required'
     rule_1=currency_from in allowed_currencies
