@@ -11,10 +11,21 @@ c=CurrencyRates()
 
 @app.route('/')
 def home():
+    """Render currency exchance form"""
+
     return render_template('index.html')
 
 @app.route('/conversion')
 def convert_currency():
+    """Check currency exchange form fields. Return error code if filled incorrectly, or show completed conversion if correct. A currency converted to itself should always be 1 to 1. 
+
+    >>> c.convert('usd','usd',1)
+    1.0
+
+    >>> c.convert('cad','cad',1000)
+    1000.0
+    """
+
     currency_from=request.args['currencyFrom'].upper()
     currency_to=request.args['currencyTo'].upper()
     start_amount=float(request.args['amount'])
